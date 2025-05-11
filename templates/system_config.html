@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Configuration - CKD Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        .config-item {
+            margin-bottom: 10px;
+        }
+        .config-icon {
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+        }
+        .config-label {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>System Configuration</h2>
+        <p>This page allows you to configure the settings of the CKD Detection system. You can modify parameters and system preferences.</p>
+        <div class="config-item">
+            <span class="config-icon">🔒</span>
+            <span class="config-label">Database Host:</span>
+            <input type="text" id="dbHost" name="dbHost">
+        </div>
+        <div class="config-item">
+            <span class="config-icon">👤</span>
+            <span class="config-label">Database Username:</span>
+            <input type="text" id="dbUser" name="dbUser">
+        </div>
+        <div class="config-item">
+            <span class="config-icon">🔑</span>
+            <span class="config-label">Database Password:</span>
+            <input type="password" id="dbPass" name="dbPass">
+        </div>
+        <div class="config-item">
+            <span class="config-icon">⚙️</span>
+            <span class="config-label">System Preferences:</span>
+            <select id="systemPref" name="systemPref">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+        <button type="submit">Save Settings</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Professional Interface - CKD Videos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #0964c5;
+            margin-bottom: 7px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 14px 15px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
+        .video {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .video iframe {
+            width: 100%;
+            height: 200px;
+        }
+        #videoUploadForm {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        #videoUploadForm input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+        #videoUploadForm button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        #videoUploadForm button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            background-color: #007bff;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="#" onclick="interpretResults()">Interpret Test Results</a>
+    <a href="#" onclick="vidupload()">Upload Video</a>
+    <a href="#" onclick="logout()">Logout</a>
+</div>
+
+<div class="container">
+    <h2>CKD Knowledge and Treatment Videos</h2>
+    <div class="video-container">
+    
+        <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Hwl8WubnO-M?si=GIi1CLUOj6ZuO4yT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        
+        <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/JjcqY95HR1o?si=JnsOpABlDg6YcBy7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/aD4R82r5hoY?si=o5a8Yb2s51v4EFpE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ok1eoHHzQT4?si=vay2xLkc0iaphiEl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/r2RuVw_rHjw?si=DonpHOUcEmhl9vFY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>        </div>
+
+        <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/hvUoPfUY5ao?si=T9Z-GwGiataTmgmD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function vidupload() {
+        window.location.href = "{{ url_for('vidupload') }}";
+    }
+    function interpretResults() {
+        window.location.href = "{{ url_for('predict_form') }}";
+    }
+    function logout() {
+        sessionStorage.clear(); 
+        window.location.href = "{{ url_for('index') }}";
+    }
+</script>
+
+</body>
+</html>

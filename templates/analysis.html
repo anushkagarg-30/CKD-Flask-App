@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis - CKD Detection</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; padding: 0; 
+            background-color: #f5f5f5; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            background-color: #fff; 
+            border-radius: 5px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
+        }
+        h1 { 
+            color: #007bff; 
+        }
+        p { 
+            margin-bottom: 20px; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+        }
+        th, td { 
+            padding: 10px; 
+            border-bottom: 1px solid #ddd; 
+        }
+        th { 
+            background-color: #007bff; 
+            color: #fff; 
+        }
+        td { 
+            text-align: left; 
+        }
+        .button-container { 
+            text-align: center; 
+        }
+        button { 
+            padding: 10px 20px; 
+            background-color: #007bff; 
+            color: #fff; border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin-top: 20px; 
+        }
+        button:hover { 
+            background-color: #0056b3; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Model Performance Analysis</h1>
+        <p>Here are the results of the machine learning analysis:</p>
+        {% for model, metrics in results.items() %}
+            <h2>{{ model }}</h2>
+            <table>
+                <tr><th>Measure</th><th>Value</th></tr>
+                <tr><td>Accuracy</td><td>{{ metrics.accuracy }}</td></tr>
+                <tr><td>Precision</td><td>{{ metrics.precision }}</td></tr>
+                <tr><td>Recall</td><td>{{ metrics.recall }}</td></tr>
+                <tr><td>F1 Score</td><td>{{ metrics.f1_score }}</td></tr>
+                <tr><td>Confusion Matrix</td><td>{{ metrics.confusion_matrix | tojson }}</td></tr>
+            </table>
+        {% endfor %}
+        <div class="button-container">
+            <button onclick="navigateToUpload()">Upload Data</button>
+            <button onclick="navigateToPredict()">Predict Again</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <script>
+        function navigateToUpload() {
+            window.location.href = "{{ url_for('upload_file') }}";
+        }
+        function navigateToPredict() {
+            window.location.href = "{{ url_for('predict_form') }}";
+        }
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = "{{ url_for('index') }}";
+        }
+    </script>
+</body>
+</html>

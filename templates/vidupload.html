@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Upload - CKD Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .file-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Video</h1>
+        <p>Select a Video to upload:</p>
+        <div class="file-container">
+            <label for="vid">Upload a New Video:</label><br>
+            <input type="file" id="videoFile" accept="video/*" required>
+            <span class="error-message" id="videoError"></span>
+            <button type="button" onclick="validateAndUpload()">Upload</button>
+            <div id="Success" class="success-message" style="display: none;">Video file uploaded successfully!</div>
+        </div>
+    </div>
+    <script>
+        function validateAndUpload() {
+            var videoInput = document.getElementById("videoFile");
+            var videoError = document.getElementById("videoError");
+            var allowedFormats = ["mp4", "avi", "mov", "wmv", "flv", "mkv"]; // Add more if needed
+            // Reset error message
+            videoError.textContent = "";
+            // Check if a file is selected
+            if (videoInput.files.length === 0) {
+                videoError.textContent = "Please select a video file.";
+                return;
+            }
+            var fileName = videoInput.files[0].name;
+            var fileExtension = fileName.split('.').pop().toLowerCase();
+            // Check if the file extension is valid
+            if (!allowedFormats.includes(fileExtension)) {
+                videoError.textContent = "Unsupported file format. Please select a video file.";
+                return;
+            }
+            // If all validations pass, you can proceed with uploading the video
+            // Add your code to upload the video here
+            alert("Video uploaded successfully!");
+        }
+    </script>
+</body>
+</html>

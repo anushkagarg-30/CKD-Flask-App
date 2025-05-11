@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Dashboard - CKD Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; 
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; 
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 15px; 
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome Guest!</h2>
+        <div class="button-container">
+            <button onclick="navigateToPatient()">Patient</button>
+            <button onclick="navigateToHealthProfessional()">Health Professional</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <script>
+        function navigateToPatient() {
+        window.location.href = "{{ url_for('patient_dashboard') }}";
+    }
+    
+    function navigateToHealthProfessional() {
+        window.location.href = "{{ url_for('health_professional_dashboard') }}";
+    }
+
+    function logout() {
+        sessionStorage.clear(); 
+        window.location.href = "{{ url_for('index') }}"; 
+    }
+    </script>
+</body>
+</html>

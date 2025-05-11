@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Upload - CKD Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .file-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Data</h1>
+        <p>Select a file to upload:</p>
+        <!-- CSV File Upload -->
+        <form method="post" action="#" enctype="multipart/form-data" data-action-url="{{ url_for('upload_file') }}">
+            <div class="file-container">
+                <label for="csvFile">Upload CSV file for ML validation:</label><br>
+                <input type="file" id="csvFile" name="csvFile" accept=".csv" required><br>
+                <button type="submit">Upload CSV</button>
+                <div id="csvSuccess" class="success-message" style="display: none;">CSV file uploaded successfully!</div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var formData = new FormData(this);
+            var actionUrl = this.dataset.actionUrl;
+    
+            fetch(actionUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        return response.json();
+                    } else {
+                        throw new Error('Expected JSON response, got ' + contentType);
+                    }
+                } else {
+                    throw new Error('Server responded with status: ' + response.status);
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('csvSuccess').style.display = 'block';
+                } else {
+                    alert('Upload failed: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during upload: ' + error.message);
+            });
+    
+            event.preventDefault(); // Prevent the default form submission
+        });
+    </script>            
+</body>
+</html>

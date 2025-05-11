@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations - CKD Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        ul {
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .thanks {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .logout a:hover {
+            text-decoration: underline;
+        }
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 80%;
+        }
+        .form-container textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            width: calc(50% - 5px);
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        .form-container .cancel {
+            background-color: #f44336;
+        }
+        .form-container .cancel:hover {
+            background-color: #da190b;
+        }
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .chat-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recommendations for Managing Chronic Kidney Disease (CKD)</h1>
+        <p>Managing Chronic Kidney Disease (CKD) is crucial for maintaining kidney health and overall well-being. Here are some recommendations to help you manage CKD effectively:</p>
+        <ul>
+            <li><strong>Choose a Doctor:</strong> It's important to consult with a nephrologist or healthcare provider specializing in kidney health to develop a personalized treatment plan.</li>
+            <li>Follow a balanced and kidney-friendly diet, low in sodium, phosphorus, and potassium.</li>
+            <li>Stay hydrated by drinking plenty of water throughout the day.</li>
+            <li>Monitor your blood pressure regularly and keep it under control.</li>
+            <li>Avoid smoking and limit alcohol consumption.</li>
+            <li>Engage in regular physical activity to maintain a healthy weight and improve circulation.</li>
+            <li>Take medications as prescribed by your healthcare provider.</li>
+            <li>Attend regular check-ups with your healthcare team to monitor kidney function and overall health.</li>
+        </ul>
+        <div class="thanks">
+            <p>Thank you for using our CKD Detection tool. We wish you all the best in managing your kidney health and overall wellness.</p>
+        </div>
+
+        <div class="logout">
+            <a href="{{ url_for('index') }}">Logout</a>
+        </div>
+    </div>
+    <div class="chat-button" onclick="toggleChat()"><br><b>Chat</b></div>
+    <div class="chat-popup" id="chat-popup">
+        <div class="form-container">
+            <textarea id="user-input" placeholder="Type your message here...">
+Hello! How can I assist you today?
+Do you have Chronic Kidney Disease (CKD)? (yes/no)
+            </textarea>
+            <button type="button" onclick="respond()">Send</button>
+            <button type="button" class="cancel" onclick="toggleChat()">Cancel</button>
+        </div>
+    </div>
+    <script>
+        function toggleChat() {
+            var popup = document.getElementById('chat-popup');
+            popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function respond() {
+            var textarea = document.getElementById('user-input');
+            var input = textarea.value.trim().toLowerCase().split('\n').pop().trim(); // Get last line input
+
+            var newText = textarea.value + '\n';
+
+            if (input === 'yes') {
+        newText += 'Here is a list of doctors for CKD patients: https://www.medindia.net/patients/doctor_search/neurology-doctors.htm\n';
+            } else if (input === 'no') {
+                newText += 'Always stay healthy! Here are some tips: https://www.healthline.com/health/kidney-health\n';
+            } else {
+                newText += 'Please answer with "yes" or "no".\n';
+            }
+            textarea.value = newText;
+            textarea.scrollTop = textarea.scrollHeight;
+        }
+    </script>
+</body>
+</html>

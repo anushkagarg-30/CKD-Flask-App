@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - CKD Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        li {
+            display: inline;
+            margin-right: 10px;
+        }
+        a {
+            text-decoration: none;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CKD Detection Results</h1>
+        <!-- <div id="result">
+            <p>Prediction Result: <span id="predictionResult"></span></p> -->
+            <ul>
+                <p>Prediction Result: {{ prediction }}</p>
+                <li><a href="{{ url_for('upload_file') }}">Data Upload</a></li>
+                <a href="{{ url_for('predict_form') }}">Predict Again</a>
+                <li><a href="{{ url_for('index') }}">Logout</a></li>
+                <li id="recommendationsTab" style="display:none;"><a href="{{ url_for('recommendation') }}">Recommendations</a></li>                
+            </ul>
+        </div>
+    </div>
+    <!-- <script>
+        // Function to get prediction result from URL query parameter
+        function getPredictionResult() {
+            var searchParams = new URLSearchParams(window.location.search);
+            return searchParams.get('prediction');
+        }
+        // Function to display prediction result and recommendations tab if CKD detected
+        function displayResultAndRecommendationsTab() {
+            var predictionResult = getPredictionResult();
+            if (predictionResult) {
+                document.getElementById("predictionResult").textContent = predictionResult;
+                if (predictionResult === 'CKD Detected') {
+                    document.getElementById("recommendationsTab").style.display = "inline";
+                }
+                // Display individual predictions alert
+                displayIndividualPredictionsAlert(predictionResult);
+            } else {
+                document.getElementById("predictionResult").textContent = "CKD Not Detected";
+                // Display individual predictions alert
+                displayIndividualPredictionsAlert(predictionResult);
+            }
+        }
+        // Function to display individual predictions alert
+        function displayIndividualPredictionsAlert(predictionResult) {
+            if (predictionResult === 'CKD Detected') {
+                // Mock individual predictions
+                var highSugarLevelDetected = true; // Change this according to your actual individual predictions
+                var highBloodPressureDetected = true; // Change this according to your actual individual predictions
+                if (highSugarLevelDetected) {
+                    alert("High sugar level detected. Possible diabetes risk.");
+                }
+                if (highBloodPressureDetected) {
+                    alert("High blood pressure detected. Possible hypertension issue.");
+                }
+            }
+        }
+        // Call the function to display prediction result and recommendations tab when the page loads
+        window.onload = displayResultAndRecommendationsTab;
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict - CKD Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            /* Add this to allow wrapping on smaller screens */
+        }
+
+        .form-row label,
+        .form-row input {
+            flex: 1 1 45%;
+            /* Change width to flex property for better control */
+            margin-bottom: 10px;
+        }
+
+        .form-row label {
+            margin-right: 5%;
+            /* Add some right margin to labels */
+            white-space: nowrap;
+            /* Prevent the labels from wrapping */
+        }
+
+        .form-row input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Additional style to ensure that label-input pairs align properly */
+        .form-row>label:nth-child(odd) {
+            clear: both;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Predict Chronic Kidney Disease</h1>
+        <form action="/predict" method="post">
+            <div class="form-row">
+                <label for="age">Age (years):</label>
+                <input type="number" step="any" id="age" name="age" placeholder="Enter Age" required>
+                <span class="error" id="ageError"></span>
+                <label for="bloodPressure">Blood Pressure (mmHg):</label>
+                <input type="number" step="any" id="bloodPressure" name="bloodPressure" placeholder="Enter Blood Pressure" required>
+                <span class="error" id="bloodPressureError"></span>
+            </div>
+            <div class="form-row">
+                <label for="specificGravity">Specific Gravity:</label>
+                <input type="number" step="any" id="specificGravity" name="specificGravity" placeholder="Enter Specific Gravity" required>
+                <span class="error" id="specificGravityError"></span>
+                 <label for="albumin">Albumin (g/dL):</label>
+                <input type="number" step="any" id="albumin" name="albumin" placeholder="Enter Albumin" required>
+                <span class="error" id="albuminError"></span>
+            </div>
+            <div class="form-row">
+                <label for="sugar">Sugar Level (mg/dL):</label>
+                <input type="number" step="any" id="sugar" name="sugar" placeholder="Enter Sugar Level" required>
+                <span class="error" id="sugarError"></span>
+                <label for="bloodGlucoseRandom">Blood Glucose Random (mg/dL):</label>
+                <input type="number" step="any" id="bloodGlucoseRandom" name="bloodGlucoseRandom" placeholder="Enter Blood Glucose Random" required>
+                <span class="error" id="bloodGlucoseRandomError"></span>
+                
+            </div>
+            <div class="form-row">
+                <label for="bloodUrea">Blood Urea (mg/dL):</label>
+                <input type="number" step="any" id="bloodUrea" name="bloodUrea" placeholder="Enter Blood Urea" required>
+                <span class="error" id="bloodUreaError"></span>
+                <label for="serumCreatinine">Serum Creatinine (mg/dL):</label>
+                <input type="number" step="any" id="serumCreatinine" name="serumCreatinine" placeholder="Enter Serum Creatinine" required>
+                <span class="error" id="serumCreatinineError"></span> 
+            </div>
+            <div class="form-row">
+                <label for="sodium">Sodium (mEq/L):</label>
+                <input type="number" step="any" id="sodium" name="sodium" placeholder="Enter Sodium" required>
+                <span class="error" id="sodiumError"></span>
+                <label for="potassium">Potassium (mEq/L):</label>
+                <input type="number" step="any" id="potassium" name="potassium" placeholder="Enter Potassium" required>
+                <span class="error" id="potassiumError"></span>
+            </div>
+            <div class="form-row">
+                <label for="hgb">Hemoglobin (HGB) (g/dL):</label>
+                <input type="number" step="any" id="hgb" name="hgb" placeholder="Enter Hemoglobin" required>
+                <span class="error" id="hgbError"></span>
+                <label for="packedCellVolume">Packed Cell Volume (%):</label>
+                <input type="number" step="any" id="packedCellVolume" name="packedCellVolume" placeholder="Enter Packed Cell Volume" required>
+                <span class="error" id="packedCellVolumeError"></span>
+            </div>
+            <div class="form-row">
+                <label for="wbc">WBC Count (cells/mm<sup>3</sup>):</label>
+                <input type="number" step="any" id="wbc" name="wbc" placeholder="Enter WBC Count" required>
+                <span class="error" id="wbcError"></span>
+                <label for="hypertension">Hypertension (0 or 1):</label>
+                <input type="number" step="any" id="hypertension" name="hypertension" placeholder="Enter Hypertension" required>
+                <span class="error" id="hypertensionError"></span>
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+    <script>
+        // Function to validate and submit prediction
+        function predict(event) {
+            event.preventDefault();
+
+            // Get form input values
+            var wbc = parseFloat(document.getElementById("wbc").value);
+            var bloodUrea = parseFloat(document.getElementById("bloodUrea").value);
+            var serumCreatinine = parseFloat(document.getElementById("serumCreatinine").value);
+            var packedCellVolume = parseFloat(document.getElementById("packedCellVolume").value);
+            var albumin = parseFloat(document.getElementById("albumin").value);
+            var hgb = parseFloat(document.getElementById("hgb").value);
+            var age = parseFloat(document.getElementById("age").value);
+            var sugar = parseFloat(document.getElementById("sugar").value);
+            var hypertension = parseFloat(document.getElementById("hypertension").value);
+            var bloodPressure = parseFloat(document.getElementById("bloodPressure").value);
+            var specificGravity = parseFloat(document.getElementById("specificGravity").value);
+            var sodium = parseFloat(document.getElementById("sodium").value);
+            var potassium = parseFloat(document.getElementById("potassium").value);
+            var bloodGlucoseRandom = parseFloat(document.getElementById("bloodGlucoseRandom").value);
+
+            // Validation
+            var isValid = true;
+            if (isNaN(wbc) || wbc <= 0) {
+                isValid = false;
+                document.getElementById("wbcError").innerHTML = "Please enter a valid WBC count.";
+            } else {
+                document.getElementById("wbcError").innerHTML = "";
+            }
+            if (isNaN(bloodUrea) || bloodUrea <= 0) {
+                isValid = false;
+                document.getElementById("bloodUreaError").innerHTML = "Please enter a valid Blood Urea value.";
+            } else {
+                document.getElementById("bloodUreaError").innerHTML = "";
+            }
+            if (isNaN(serumCreatinine) || serumCreatinine <= 0) {
+                isValid = false;
+                document.getElementById("serumCreatinineError").innerHTML = "Please enter a valid Serum Creatinine value.";
+            } else {
+                document.getElementById("serumCreatinineError").innerHTML = "";
+            }
+            if (isNaN(packedCellVolume) || packedCellVolume <= 0) {
+                isValid = false;
+                document.getElementById("packedCellVolumeError").innerHTML = "Please enter a valid Packed Cell Volume.";
+            } else {
+                document.getElementById("packedCellVolumeError").innerHTML = "";
+            }
+            if (isNaN(albumin) || albumin <= 0) {
+                isValid = false;
+                document.getElementById("albuminError").innerHTML = "Please enter a valid Albumin value.";
+            } else {
+                document.getElementById("albuminError").innerHTML = "";
+            }
+            if (isNaN(hgb) || hgb <= 0) {
+                isValid = false;
+                document.getElementById("hgbError").innerHTML = "Please enter a valid Hemoglobin value.";
+            } else {
+                document.getElementById("hgbError").innerHTML = "";
+            }
+            if (isNaN(age) || age <= 0) {
+                isValid = false;
+                document.getElementById("ageError").innerHTML = "Please enter a valid Age.";
+            } else {
+                document.getElementById("ageError").innerHTML = "";
+            }
+            if (isNaN(sugar) || sugar <= 0) {
+                isValid = false;
+                document.getElementById("sugarError").innerHTML = "Please enter a valid Sugar level.";
+            } else {
+                document.getElementById("sugarError").innerHTML = "";
+            }
+            if (isNaN(hypertension) || (hypertension !== 0 && hypertension !== 1)) {
+                isValid = false;
+                document.getElementById("hypertensionError").innerHTML = "Please enter a valid Hypertension value (0 or 1).";
+            } else {
+                document.getElementById("hypertensionError").innerHTML = "";
+            }
+            if (isNaN(bloodPressure) || bloodPressure <= 0) {
+                isValid = false;
+                document.getElementById("bloodPressureError").innerHTML = "Please enter a valid Blood Pressure.";
+            } else {
+                document.getElementById("bloodPressureError").innerHTML = "";
+            }
+            if (isNaN(specificGravity) || specificGravity <= 0) {
+                isValid = false;
+                document.getElementById("specificGravityError").innerHTML = "Please enter a valid Specific Gravity.";
+            } else {
+                document.getElementById("specificGravityError").innerHTML = "";
+            }
+            if (isNaN(sodium) || sodium <= 0) {
+                isValid = false;
+                document.getElementById("sodiumError").innerHTML = "Please enter a valid Sodium value.";
+            } else {
+                document.getElementById("sodiumError").innerHTML = "";
+            }
+            if (isNaN(potassium) || potassium <= 0) {
+                isValid = false;
+                document.getElementById("potassiumError").innerHTML = "Please enter a valid Potassium value.";
+            } else {
+                document.getElementById("potassiumError").innerHTML = "";
+            }
+            if (isNaN(bloodGlucoseRandom) || bloodGlucoseRandom <= 0) {
+                isValid = false;
+                document.getElementById("bloodGlucoseRandomError").innerHTML = "Please enter a valid Blood Glucose Random value.";
+            } else {
+                document.getElementById("bloodGlucoseRandomError").innerHTML = "";
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Calculate prediction result for CKD detection
+        //     var ckdPredictionResult = calculateCKDPredictionResult(wbc, bloodUrea, serumCreatinine, packedCellVolume, albumin, hgb, age, sugar, hypertension, bloodPressure, specificGravity, sodium, potassium, bloodGlucoseRandom);
+
+        //     // Redirect to results page with CKD prediction result
+        //     var ckdPredictionResult = "some_prediction_value"; // Replace with your actual prediction value
+        //     window.location.href = "{{ url_for('result') }}?prediction=" + encodeURIComponent(ckdPredictionResult);
+        // }
+
+        // // Function to calculate CKD prediction result
+        // function calculateCKDPredictionResult(wbc, bloodUrea, serumCreatinine, packedCellVolume, albumin, hgb, age, sugar, hypertension, bloodPressure, specificGravity, sodium, potassium, bloodGlucoseRandom) {
+        //     // Mock calculation for prediction result (replace with actual prediction logic)
+        //     // For now, let's assume CKD is detected if any value is above a certain threshold
+        //     if (wbc > 10 || bloodUrea > 20 || serumCreatinine > 1 || packedCellVolume < 40 || albumin < 3 || hgb < 12 || age > 50 || sugar > 150 || hypertension === 1 || bloodPressure > 140 || specificGravity < 1.005 || sodium < 135 || potassium > 5.5 || bloodGlucoseRandom > 200) {
+        //         var individualPredictions = calculateIndividualPredictions(sugar, bloodPressure, sodium);
+        //         return 'CKD Detected. ' + individualPredictions;
+        //     } else {
+        //         var individualPredictions = calculateIndividualPredictions(sugar, bloodPressure, sodium);
+        //         return 'CKD Not Detected. ' + individualPredictions;
+        //     }
+        // }
+
+        // // Function to calculate individual predictions
+        // function calculateIndividualPredictions(sugar, bloodPressure, sodium) {
+        //     var predictions = "";
+        //     if (sugar > 150) {
+        //         predictions += "High sugar level detected. Possible diabetes risk. ";
+        //     }
+        //     if (bloodPressure > 140) {
+        //         predictions += "High blood pressure detected. Possible hypertension issue. ";
+        //     }
+        //     if (sodium < 135) {
+        //         predictions += "Low sodium level detected. May indicate a health problem. ";
+        //     }
+        //     return predictions;
+        }
+    </script> 
+</body>
+
+</html>
