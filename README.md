@@ -1,84 +1,84 @@
-Here's a complete and polished `README.md` content for your **CKD Flask App**:
+Absolutely — here's the **correct and clean `README.md` content in pure Markdown** format. You can copy-paste this directly into your `README.md` file:
 
 ---
 
-```markdown
+````markdown
 # 🩺 Chronic Kidney Disease (CKD) Prediction – Flask Web App
 
-This project is a Flask-based web application for predicting Chronic Kidney Disease (CKD) using multiple machine learning models. It offers a user-friendly interface where users can input relevant medical data and receive instant predictions.
+This is a Flask-based web application for predicting Chronic Kidney Disease (CKD) using machine learning models such as Random Forest, XGBoost, and CatBoost. It provides a web interface where users can input medical data and receive real-time predictions.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
 ## 🚀 Features
 
-- 🧠 **Multiple ML Models**: Includes Random Forest, XGBoost, and CatBoost for accurate prediction.
-- 🧪 **Preprocessing**: Handles data cleaning, encoding, and scaling.
-- 👩‍⚕️ **Role-Based UI**: Includes login, signup, and dashboards for patients, doctors, and admins.
-- 📊 **Result Analysis**: Shows results and recommendations based on predicted risk.
+- 🔍 Predict CKD using trained machine learning models
+- 👩‍⚕️ Role-based login for patients, doctors, and admins
+- 📊 Interactive result display and recommendations
+- 🧼 Built-in data preprocessing and model loading
+- 🌐 User-friendly web interface using Flask templates
+
+---
+
+## 🧑‍💻 How to Run the App
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/anushkagarg-30/CKD-Flask-App.git
+cd CKD-Flask-App
+````
+
+### 2. Set Up a Virtual Environment (Optional but Recommended)
+
+```bash
+python -m venv env
+# On Windows
+env\Scripts\activate
+# On macOS/Linux
+source env/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Start the Flask Application
+
+```bash
+python app.py
+```
+
+Now open your browser and go to:
+[http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
 ## 📁 Project Structure
 
 ```
-
-ckd-flask-app/
+CKD-Flask-App/
 ├── app.py                  # Main Flask app
 ├── models.py               # ML model loading and prediction logic
+├── templates/              # HTML templates for views
+├── static/                 # Static files (images, CSS)
 ├── utilities/              # Data preprocessing utilities
-├── static/                 # Images, CSS (if any)
-├── templates/              # HTML templates (index, result, login, etc.)
-├── models/                 # (Optional) Trained model files
-├── catboost\_info/          # Model training info
-├── .gitignore
-├── requirements.txt
-└── README.md
-
-````
+├── catboost_info/          # Logs from CatBoost training
+├── requirements.txt        # Python dependencies
+├── .gitignore              # Ignored files/folders
+└── README.md               # Project documentation
+```
 
 ---
 
-## 🧑‍💻 How to Run
+## 📊 Dataset
 
-### Step 1: Clone the Repo
-```bash
-git clone https://github.com/anushkagarg-30/CKD-Flask-App.git
-cd CKD-Flask-App
-````
-
-### Step 2: Create Virtual Environment (Optional but recommended)
-
-```bash
-python -m venv env
-# Windows
-env\Scripts\activate
-# Mac/Linux
-source env/bin/activate
-```
-
-### Step 3: Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Run the App
-
-```bash
-python app.py
-```
-
-Visit [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
-
----
-
-## 📝 Dataset
-
-This app is trained using a Chronic Kidney Disease dataset with anonymized patient health metrics like:
+This application uses the **Chronic Kidney Disease dataset** from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/chronic_kidney_disease). The dataset includes patient-level attributes such as:
 
 * Blood Pressure
 * Albumin
@@ -86,7 +86,7 @@ This app is trained using a Chronic Kidney Disease dataset with anonymized patie
 * Red Blood Cells
 * Hemoglobin
 * Serum Creatinine
-  *(Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/chronic_kidney_disease))*
+* and more...
 
 ---
 
@@ -97,34 +97,22 @@ This app is trained using a Chronic Kidney Disease dataset with anonymized patie
 * scikit-learn
 * pandas
 * numpy
-* XGBoost
-* CatBoost
+* xgboost
+* catboost
+
+Install them via `requirements.txt` or manually.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
 ---
 
-## 🙋‍♀️ Author
+## 👩‍💻 Author
 
 **Anushka Garg**
-[GitHub](https://github.com/anushkagarg-30)
+GitHub: [@anushkagarg-30](https://github.com/anushkagarg-30)
 
----
-
-````
-
----
-
-You can create a file named `README.md` in your project folder, paste this content, then run:
-
-```bash
-git add README.md
-git commit -m "Add README file"
-git push
-````
-
-Would you like help generating the `requirements.txt` next?
+```
