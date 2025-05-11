@@ -1,8 +1,3 @@
-Absolutely — here's the **correct and clean `README.md` content in pure Markdown** format. You can copy-paste this directly into your `README.md` file:
-
----
-
-````markdown
 # 🩺 Chronic Kidney Disease (CKD) Prediction – Flask Web App
 
 This is a Flask-based web application for predicting Chronic Kidney Disease (CKD) using machine learning models such as Random Forest, XGBoost, and CatBoost. It provides a web interface where users can input medical data and receive real-time predictions.
